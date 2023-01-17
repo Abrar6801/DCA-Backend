@@ -29,7 +29,7 @@ public class User{
     @Size(min=4)
     private String password;
     @Column(unique = true,nullable = false)
-    @Min(1000000000)
+    @Min(6000000000L)
     @Max(9999999999L)
     private long phoneNumber;
     @Column(columnDefinition = "boolean default false")
