@@ -5,48 +5,56 @@ import com.example.dcabackend.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
-
     @Autowired
     private UserDoa userDoa;
-//    List<User> list;
     public UserServiceImpl(){
-
     }
     @Override
     public List<User> getUsers() {
         return userDoa.findAll();
     }
-
     @Override
     public User getUser(long userId){
-        return userDoa.findById(userId).get();
-    }
-//    public User getUser(long userId) {
-//
-//        return userDoa.getOne(userId);
-//    }
 
+            return userDoa.findById(userId).get();
+
+    }
     @Override
-    public long addUser(User user) {
+    public String addUser(User user) {
         userDoa.save(user);
         long u = user.getId();
-        return u;
+        return "User added successfully";
     }
-
     @Override
     public User updateUser(User user) {
         userDoa.save(user);
         return user;
     }
-
     @Override
     public void deleteUser(long userId) {
-        User entity = userDoa.getOne(userId);
+        User entity = userDoa.findById(userId).get();
         userDoa.delete(entity);
+    }
+    @Override
+    public List<User> findAllByBlocked(boolean blocked) {
+        return userDoa.findAllByBlocked(blocked);
+    }
+    @Override
+    public List<User> findAllByBlockedIsTrue(boolean blocked){
+        return userDoa.findAllByBlocked(!blocked);
+    }
+    @Override
+    public Optional<User> findByIdAndBlocked(long id, boolean blocked) {
+        return userDoa.findByIdAndBlocked(id,blocked);
+    }
+    @Override
+    public void blockOrUnblockUser(boolean blocked, long id) {
+        userDoa.blockOrUnblockUser(!blocked,id);
     }
 }

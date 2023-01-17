@@ -1,10 +1,9 @@
 package com.example.dcabackend.Doa;
 
-import com.example.dcabackend.Entity.Block;
-import com.example.dcabackend.Entity.User;
+import com.example.dcabackend.Entity.Representative;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BlockDoa extends JpaRepository<Block,Long> {
+public interface RepresentativeDoa extends JpaRepository<Representative,Long> {
 }
